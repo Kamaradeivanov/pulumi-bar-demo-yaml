@@ -1,0 +1,21 @@
+name: bar-demo-yaml
+description: A minimal AWS Pulumi YAML program
+runtime: yaml
+resources:
+  # Create an kaspule kuberntes cluster on scaleway
+  kubernetes-cluster:
+    type: scaleway:KubernetesCluster
+    properties: # The arguments to resource properties.
+      autoUpgrade:
+        enable: false
+        maintenanceWindowDay: monday
+        maintenanceWindowStartHour: 02
+      autoscalerConfig:
+        scaleDownDelayAfterAdd: 10m
+      type: kapsule
+      cni: cilium
+      version: 1.24.5
+
+outputs:
+  # Export the name of the bucket
+  kubeconfigs: ${kubernetes-cluster.kubeconfigs}
