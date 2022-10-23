@@ -6,6 +6,7 @@ resources:
   kubernetes-cluster:
     type: scaleway:KubernetesCluster
     properties: # The arguments to resource properties.
+      name: ${pulumi.stack}
       autoUpgrade:
         enable: false
         maintenanceWindowDay: monday
